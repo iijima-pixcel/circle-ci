@@ -1,13 +1,10 @@
 AWSTemplateFormatVersion: 2010-09-09
 
-AvailabilityZone1a:
-    Description: Please input Availability Zone
-    Type: AWS::EC2::AvailabilityZone::Name
-    Default: ap-northeast-1a
-AvailabilityZone1c:
-    Description: Please input Availability Zone
-    Type: AWS::EC2::AvailabilityZone::Name
-    Default: ap-northeast-1c
+Parameters:
+  RegionParameter1:
+      Type: String
+      Description: Please input AWS region
+      Default: ap-northeast-1
 
 Resources: 
 #vpcの作成
@@ -23,7 +20,9 @@ Resources:
   Public1aL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Ref AvailabilityZone1a
+      AvailabilityZone: !Select 
+        - "0"
+        - Fn::GetAZs: !Ref RegionParameter1
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.0.0/20
       Tags:
@@ -32,7 +31,9 @@ Resources:
   Private1aL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Ref AvailabilityZone1a
+      AvailabilityZone: !Select 
+        - "0"
+        - Fn::GetAZs: !Ref RegionParameter1
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.128.0/20
       Tags:
@@ -41,7 +42,9 @@ Resources:
   Public1cL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Ref AvailabilityZone1c
+      AvailabilityZone: !Select 
+        - "1"
+        - Fn::GetAZs: !Ref RegionParameter1
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.16.0/20
       Tags:
@@ -50,7 +53,9 @@ Resources:
   Private1cL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: !Ref AvailabilityZone1c
+      AvailabilityZone: !Select 
+        - "1"
+        - Fn::GetAZs: !Ref RegionParameter1
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.144.0/20
       Tags:
