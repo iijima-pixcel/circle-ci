@@ -1,4 +1,14 @@
 AWSTemplateFormatVersion: 2010-09-09
+
+AvailabilityZone1a:
+    Description: Please input Availability Zone
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: ap-northeast-1a
+AvailabilityZone1c:
+    Description: Please input Availability Zone
+    Type: AWS::EC2::AvailabilityZone::Name
+    Default: ap-northeast-1c
+
 Resources: 
 #vpcの作成
   Lesson10Vpc:
@@ -13,7 +23,7 @@ Resources:
   Public1aL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: ap-northeast-1a
+      AvailabilityZone: !Ref AvailabilityZone1a
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.0.0/20
       Tags:
@@ -22,7 +32,7 @@ Resources:
   Private1aL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: ap-northeast-1a
+      AvailabilityZone: !Ref AvailabilityZone1a
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.128.0/20
       Tags:
@@ -31,7 +41,7 @@ Resources:
   Public1cL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: ap-northeast-1c
+      AvailabilityZone: !Ref AvailabilityZone1c
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.16.0/20
       Tags:
@@ -40,7 +50,7 @@ Resources:
   Private1cL10:
     Type: AWS::EC2::Subnet
     Properties:
-      AvailabilityZone: ap-northeast-1c
+      AvailabilityZone: !Ref AvailabilityZone1c
       VpcId: !Ref Lesson10Vpc
       CidrBlock: 10.0.144.0/20
       Tags:
